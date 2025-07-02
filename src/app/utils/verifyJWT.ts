@@ -1,4 +1,5 @@
 import jwt, { JwtPayload, Secret, SignOptions } from 'jsonwebtoken';
+import type ms from 'ms';
 import AppError from '../errors/AppError';
 import { USER_ROLE, USER_STATUS } from '../modules/User/user.constant';
 
@@ -12,8 +13,9 @@ export const createToken = (
     status: keyof typeof USER_STATUS;
   },
   secret: Secret,
-  expiresIn: SignOptions['expiresIn']
+  expiresIn: number | ms.StringValue | undefined
 ) => {
+  // TypeScript will enforce the correct expiresIn type here
   const options: SignOptions = { expiresIn };
   return jwt.sign(jwtPayload, secret, options);
 };
@@ -23,7 +25,6 @@ export const verifyToken = (
   secret: Secret
 ): JwtPayload => {
   try {
-    // jwt.verify returns string | JwtPayload, so cast safely
     const decoded = jwt.verify(token, secret);
     if (typeof decoded === 'string') {
       throw new AppError(401, 'Invalid token payload!');
