@@ -5,7 +5,7 @@ import { ItemRoutes } from '../modules/item/item.route';
 import { ItemCategoryRoutes } from '../modules/ItemCategory/itemCategory.route';
 import { ProfileRoutes } from '../modules/Profile/profile.route';
 import { ClaimRequestRoutes } from '../modules/ClaimRequest/claimRequest.route';
-// import { MeilisearchRoutes } from '../modules/Meilisearch/meilisearch.routes';
+import { MeilisearchRoutes } from '../modules/Meilisearch/meilisearch.routes';
 import { ImageUploadRoutes } from '../modules/ImageUpload/imageUpload.routes';
 
 const router = express.Router();
@@ -27,10 +27,10 @@ const moduleRoutes = [
     path: '/claim-request',
     route: ClaimRequestRoutes,
   },
-  // {
-  //   path: '/search-items',
-  //   route: MeilisearchRoutes,
-  // },
+  {
+    path: '/search-items',
+    route: MeilisearchRoutes,
+  },
   {
     path: '/users',
     route: UserRoutes,
